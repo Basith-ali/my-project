@@ -1,4 +1,4 @@
-# Importing required libraries
+#Importing required libraries
 import cv2
 import speech_recognition as sr
 import time
@@ -7,11 +7,11 @@ from ultralytics import YOLO
 import urllib.request
 import numpy as np
 
-# Initialize voice recognizer
+#Initialize voice recognizer
 r = sr.Recognizer()
 
 
-# Converting speech to text using Google web API
+#Converting speech to text
 def listen_for_command():
     with sr.Microphone() as source:
         print('Command Please - ')
@@ -28,16 +28,16 @@ def listen_for_command():
             return text
 
 
-# Initializing PWM of motors
+#Initializing PWM of motors
 def move_forward():
     import requests
 
-    # ESP32 IP address
+    #ESP32 IP address
     esp32_ip = "http://192.168.1.202"
 
-    # Function to set the brightness of LEDs
+    #Function to set the brightness of LEDs
     def set_led_brightness(led1_brightness, led2_brightness):
-        # Make an HTTP GET request to set the brightness of both LEDs
+        #Make an HTTP GET request to set the brightness of both LEDs
         try:
             response = requests.get(f"{esp32_ip}/set", params={
                 "value1": led1_brightness,
@@ -50,31 +50,31 @@ def move_forward():
         except Exception as e:
             print("Error:", e)
 
-    # Main function
+    #Main function
     def main():
         print("Setting LED brightness on the ESP32")
 
-        # Set the brightness for both LEDs (values from 0 to 255)
-        led1_brightness = 150  # Brightness level for LED 1 (0-255)
-        led2_brightness = 150  # Brightness level for LED 2 (0-255)
+        #Set the brightness for both LEDs (values from 0 to 255)
+        led1_brightness = 150  
+        led2_brightness = 150  
 
-        # Call the function to set the brightness
+        #Call the function to set the brightness
         set_led_brightness(led1_brightness, led2_brightness)
 
     if __name__ == "__main__":
         main()
 
 
-# Code to turn left
+#Code to turn left
 def turn_left():
     import requests
 
-    # ESP32 IP address (replace with your actual IP)
+    #ESP32 IP address
     esp32_ip = "http://192.168.1.202"
 
-    # Function to set the brightness of LEDs
+    #Function to set the brightness of LEDs
     def set_led_brightness(led1_brightness, led2_brightness):
-        # Make an HTTP GET request to set the brightness of both LEDs
+        #Make an HTTP GET request to set the brightness of both LEDs
         try:
             response = requests.get(f"{esp32_ip}/set", params={
                 "value1": led1_brightness,
@@ -87,31 +87,31 @@ def turn_left():
         except Exception as e:
             print("Error:", e)
 
-    # Main function
+    #Main function
     def main():
         print("Setting LED brightness on the ESP32")
 
-        # Set the brightness for both LEDs (values from 0 to 255)
-        led1_brightness = 0  # Brightness level for LED 1 (0-255)
-        led2_brightness = 150  # Brightness level for LED 2 (0-255)
+        #Set the brightness for both LEDs (values from 0 to 255)
+        led1_brightness = 0  
+        led2_brightness = 150 
 
-        # Call the function to set the brightness
+        #Call the function to set the brightness
         set_led_brightness(led1_brightness, led2_brightness)
 
     if __name__ == "__main__":
         main()
 
 
-# Code to turn right
+#Code to turn right
 def turn_right():
     import requests
 
-    # ESP32 IP address (replace with your actual IP)
+    #ESP32 IP address
     esp32_ip = "http://192.168.1.202"
 
-    # Function to set the brightness of LEDs
+    #Function to set the brightness of LEDs
     def set_led_brightness(led1_brightness, led2_brightness):
-        # Make an HTTP GET request to set the brightness of both LEDs
+        #Make an HTTP GET request to set the brightness of both LEDs
         try:
             response = requests.get(f"{esp32_ip}/set", params={
                 "value1": led1_brightness,
@@ -124,31 +124,31 @@ def turn_right():
         except Exception as e:
             print("Error:", e)
 
-    # Main function
+    #Main function
     def main():
         print("Setting LED brightness on the ESP32")
 
-        # Set the brightness for both LEDs (values from 0 to 255)
-        led1_brightness = 150  # Brightness level for LED 1 (0-255)
-        led2_brightness = 0  # Brightness level for LED 2 (0-255)
+        #Set the brightness for both LEDs (values from 0 to 255)
+        led1_brightness = 150  
+        led2_brightness = 0  
 
-        # Call the function to set the brightness
+        #Call the function to set the brightness
         set_led_brightness(led1_brightness, led2_brightness)
 
     if __name__ == "__main__":
         main()
 
 
-# Code to stop the trolly
+#Code to stop the trolly
 def stop_trolley():
     import requests
 
-    # ESP32 IP address (replace with your actual IP)
+    #ESP32 IP address
     esp32_ip = "http://192.168.1.202"
 
-    # Function to set the brightness of LEDs
+    #Function to set the brightness of LEDs
     def set_led_brightness(led1_brightness, led2_brightness):
-        # Make an HTTP GET request to set the brightness of both LEDs
+        #Make an HTTP GET request to set the brightness of both LEDs
         try:
             response = requests.get(f"{esp32_ip}/set", params={
                 "value1": led1_brightness,
@@ -161,39 +161,39 @@ def stop_trolley():
         except Exception as e:
             print("Error:", e)
 
-    # Main function
+    #Main function
     def main():
         print("Setting LED brightness on the ESP32")
 
-        # Set the brightness for both LEDs (values from 0 to 255)
-        led1_brightness = 0  # Brightness level for LED 1 (0-255)
-        led2_brightness = 0  # Brightness level for LED 2 (0-255)
+        #Set the brightness for both LEDs (values from 0 to 255)
+        led1_brightness = 0 
+        led2_brightness = 0  
 
-        # Call the function to set the brightness
+        #Call the function to set the brightness
         set_led_brightness(led1_brightness, led2_brightness)
 
     if __name__ == "__main__":
         main()
 
 
-# Detecting person and following by Loading the YOLOv8s model
+#Detecting person and following by Loading the YOLOv8s model
 url = 'http://192.168.1.241/cam-hi.jpg'
 def capture_and_follow():
-    # URL of the ESP32 camera stream (replace with your camera's IP address and endpoint)
+    #URL of the ESP32 camera stream
     url = 'http://192.168.1.241/cam-hi.jpg'
 
-    # Load the YOLOv8s model
-    model = YOLO('yolov8s.pt')  # You can replace 'yolov8s.pt' with the path to your trained model if needed
+    #Load the YOLOv8s model
+    model = YOLO('yolov8s.pt')
 
     cv2.namedWindow("ESP32 Camera Feed with YOLO Detection", cv2.WINDOW_AUTOSIZE)
 
-    # Variables to track person movement
+    #Variables to track person movement
     person_center_previous = None
 
     while True:
-        # Capture frame-by-frame from ESP32 camera
+        #Capture frame-by-frame from ESP32 camera
         try:
-            # Fetch the image from ESP32 camera stream
+            #Fetch the image from ESP32 camera stream
             img_resp = urllib.request.urlopen(url)
             imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
             frame = cv2.imdecode(imgnp, -1)
@@ -201,75 +201,74 @@ def capture_and_follow():
             print(f"Error accessing ESP32 camera: {e}")
             break
 
-        # Check if the frame is valid
+        #Check if the frame is valid
         if frame is None:
             print("Failed to capture image from ESP32 camera.")
             break
 
-        # Perform object detection with YOLO
+        #Perform object detection with YOLO
         results = model(frame)
 
-        # Extract detections from results
+        #Extract detections from results
         person_detected = False
         person_center_current = None
 
         for result in results:
             for det in result.boxes:
-                x1, y1, x2, y2 = map(int, det.xyxy[0])  # Bounding box coordinates
-                conf = det.conf[0].item()  # Confidence score
-                cls = int(det.cls[0].item())  # Class ID
+                x1, y1, x2, y2 = map(int, det.xyxy[0])  
+                conf = det.conf[0].item() 
+                cls = int(det.cls[0].item())  
 
-                # Assuming 'person' class is 0; modify if needed
-                if cls == 0 and conf > 0.5:  # Confidence threshold
-                    # Draw bounding box for the detected person
+                #Assuming 'person' class is 0
+                if cls == 0 and conf > 0.5:  
+                    #Draw bounding box for the detected person
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 2)
 
-                    # Basic logic for following: center-based movement control
+                    #Basic logic for following: center-based movement control
                     center_x = (x1 + x2) // 2
                     frame_center = frame.shape[1] // 2
 
-                    # Track current person center
+                    #Track current person center
                     person_center_current = center_x
 
-                    # Determine movement based on person's position
-                    if center_x < frame_center - 50:  # Person is to the left
+                    #Determine movement based on person's position
+                    if center_x < frame_center - 50:  #Person is to the left
                         turn_left()
-                    elif center_x > frame_center + 50:  # Person is to the right
+                    elif center_x > frame_center + 50:  #Person is to the right
                         turn_right()
-                    else:  # Person is in the center
+                    else:  #Person is in the center
                         if person_center_previous is not None and abs(
                                 person_center_current - person_center_previous) > 10:
-                            # If the person is moving, move forward
+                            #If the person is moving, move forward
                             move_forward()
                         else:
-                            # If the person is not moving, stop
+                            #If the person is not moving, stop
                             stop_trolley()
 
                     person_detected = True
                     break
 
-        # If no person is detected, stop the trolley
+        #If no person is detected, stop the trolley
         if not person_detected:
             stop_trolley()
 
-        # Update previous center position
+        #Update previous center position
         person_center_previous = person_center_current
 
-        # Display the frame with YOLO detections
+        #Display the frame with YOLO detections
         cv2.imshow('ESP32 Camera Feed with YOLO Detection', frame)
 
-        # Exit loop if 'q' is pressed
+        #Exit loop if 'q' is pressed
         key = cv2.waitKey(1)
         if key == ord('q'):
             break
 
-    # Close OpenCV windows
     cv2.destroyAllWindows()
 
 
-# Main-loop
+#Main-loop
 def main():
-    ia = False  # Flag to check if the trolley is active
+    ia = False  #Flag to check if the trolley is active
 
     try:
         while True:
@@ -278,7 +277,7 @@ def main():
             if "ready" in command and not ia:
                 print("Activating System...")
                 ia = True
-                capture_and_follow()  # Start human detection and following
+                capture_and_follow()  #Start human detection and following
 
             elif "finish" in command and ia:
                 print("Resetting System...")
@@ -314,3 +313,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#In this code you can notice that we have used the terms 'brightness, LED' in some lines of code.
+#But in our final prototype we haven't used LEDs.
+#Initially while we are doing the trial & error process of our code, we used two LEDs instead of two motors for easier checking.
+#So we written our code using those terms.
+#But this is the exact same code we used for our final prototype.
+#And guess what? We successfully implemented all the feature which we thoght to showcase in our final prototype:)
